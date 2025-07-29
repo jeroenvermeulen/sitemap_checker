@@ -20,5 +20,9 @@ class CsvResultRender implements ResultRenderInterface {
     return $string;
   }
 
+  public function getType(): string
+  {
+    return 'CSV';
+  }
 
 }

@@ -15,5 +15,9 @@ class PlainResultRender implements ResultRenderInterface {
     return $string;
   }
 
+  public function getType(): string
+  {
+    return 'plain';
+  }
 
 }

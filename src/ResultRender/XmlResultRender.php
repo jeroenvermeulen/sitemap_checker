@@ -22,5 +22,9 @@ class XmlResultRender implements ResultRenderInterface {
     return $xml->asXML() ?: '';
   }
 
+  public function getType(): string
+  {
+    return 'XML';
+  }
 
 }

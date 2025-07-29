@@ -23,5 +23,9 @@ class JsonResultRender implements ResultRenderInterface {
     return json_encode($array, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK) ?: '';
   }
 
+  public function getType(): string
+  {
+    return 'JSON';
+  }
 
 }
