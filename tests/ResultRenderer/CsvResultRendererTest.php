@@ -13,4 +13,10 @@ class CsvResultRendererTest extends ResultRendererTestBase
     $this->assertStringContainsString('"https://www.example.com/","Title","200"', $renderedResult);
   }
 
+  public function testCsvRenderReturnsType()
+  {
+    $resultRenderer = new CsvResultRender();
+    $this->assertEquals('CSV', $resultRenderer->getType());
+  }
+
 }

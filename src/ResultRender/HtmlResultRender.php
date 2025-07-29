@@ -36,5 +36,9 @@ class HtmlResultRender implements ResultRenderInterface {
 EOL;
   }
 
+  public function getType(): string
+  {
+    return 'HTML';
+  }
 
 }

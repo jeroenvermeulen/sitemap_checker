@@ -17,4 +17,10 @@ class HtmlResultRendererTest extends ResultRendererTestBase
     $this->assertStringContainsString('<li><strong>Response Code:</strong> 200</li>', $renderedResult);
   }
 
+  public function testHtmlRenderReturnsType()
+  {
+    $resultRenderer = new HtmlResultRender();
+    $this->assertEquals('HTML', $resultRenderer->getType());
+  }
+
 }

@@ -16,4 +16,10 @@ class JsonResultRendererTest extends ResultRendererTestBase
     $this->assertStringContainsString('"response_code":200', $renderedResult);
   }
 
+  public function testJsonRenderReturnsType()
+  {
+    $resultRenderer = new JsonResultRender();
+    $this->assertEquals('JSON', $resultRenderer->getType());
+  }
+
 }

@@ -6,4 +6,5 @@ use Hashbangcode\SitemapChecker\Result\ResultCollectionInterface;
 
 interface ResultRenderInterface {
   public function render(ResultCollectionInterface $resultCollection): string;
+  public function getType(): string;
 }

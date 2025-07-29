@@ -204,44 +204,27 @@ class SitemapChecker extends Command
         }
 
         $progressBar->finish();
+        // We don't want to print our next output after the progress bar.
+        $output->writeln('');
 
         $resultFile = $input->getOption('result-file');
 
         if ($resultFile === NULL) {
-          // Write a blank line to print the results correctly.
           $resultRender = new PlainResultRender();
-          $output->writeln('');
           $output->writeln($resultRender->render($results));
         }
-        elseif (is_string($resultFile) && str_contains($resultFile, '.csv')) {
-          $io->info('Writing CSV file.');
-          $resultRender = new CsvResultRender();
-          $renderedResult = $resultRender->render($results);
-          file_put_contents($resultFile, $renderedResult);
-        }
-        elseif (is_string($resultFile) && str_contains($resultFile, '.json')) {
-          $io->info('Writing JSON file.');
-          $resultRender = new JsonResultRender();
-          $renderedResult = $resultRender->render($results);
-          file_put_contents($resultFile, $renderedResult);
-        }
-        elseif (is_string($resultFile) && str_contains($resultFile, '.xml')) {
-          $io->info('Writing XML file.');
-          $resultRender = new XmlResultRender();
-          $renderedResult = $resultRender->render($results);
-          file_put_contents($resultFile, $renderedResult);
-        }
-        elseif (is_string($resultFile) && str_contains($resultFile, '.html')) {
-          $io->info('Writing HTML file.');
-          $resultRender = new HtmlResultRender();
-          $renderedResult = $resultRender->render($results);
-          file_put_contents($resultFile, $renderedResult);
-        }
         else {
-          $io->error('Invalid output format found.');
-          return Command::INVALID;
+            $resultExt = strtolower(pathinfo($resultFile, PATHINFO_EXTENSION));
+            $resultRender = match ($resultExt) {
+              'csv' => new CsvResultRender(),
+              'json' => new JsonResultRender(),
+              'xml' => new XmlResultRender(),
+              'html' => new HtmlResultRender(),
+              default => new PlainResultRender(),
+            };
+            $io->info(sprintf('Writing %s file.', $resultRender->getType()));
+            file_put_contents($resultFile, $resultRender->render($results));
         }
-
         return Command::SUCCESS;
     }
 
