@@ -14,4 +14,10 @@ class PlainResultRendererTest extends ResultRendererTestBase
     $this->assertStringContainsString('https://www.example.com/ Title 200', $renderedResult);
   }
 
+  public function testPlainRenderReturnsType()
+  {
+    $resultRenderer = new PlainResultRender();
+    $this->assertEquals('plain', $resultRenderer->getType());
+  }
+
 }

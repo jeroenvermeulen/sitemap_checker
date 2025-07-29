@@ -16,4 +16,10 @@ class XmlResultRendererTest extends ResultRendererTestBase
     $this->assertStringContainsString('<response_code>200</response_code>', $renderedResult);
   }
 
+  public function testXmlRenderReturnsType()
+  {
+    $resultRenderer = new XmlResultRender();
+    $this->assertEquals('XML', $resultRenderer->getType());
+  }
+
 }
