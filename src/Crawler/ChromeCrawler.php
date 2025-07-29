@@ -42,6 +42,7 @@ class ChromeCrawler extends CrawlerBase
               $result->setPageSize(mb_strlen($value));
               $result->setBody($value);
             }
+            $page->close();
         }
 
         return $result;
