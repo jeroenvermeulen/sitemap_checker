@@ -177,7 +177,8 @@ class SitemapChecker extends Command
         switch ($engine) {
           case 'chrome':
             $crawler = new ChromeCrawler();
-            $browserFactory = new BrowserFactory('./chrome/chrome');
+            $chromeBinary = is_executable('./chrome/chrome') ? './chrome/chrome' : null;
+            $browserFactory = new BrowserFactory($chromeBinary);
             $crawler->setEngine($browserFactory->createBrowser());
             break;
 
