@@ -204,13 +204,13 @@ class SitemapChecker extends Command
         }
 
         $progressBar->finish();
+        // We don't want to print our next output after the progress bar.
+        $output->writeln('');
 
         $resultFile = $input->getOption('result-file');
 
         if ($resultFile === NULL) {
-          // Write a blank line to print the results correctly.
           $resultRender = new PlainResultRender();
-          $output->writeln('');
           $output->writeln($resultRender->render($results));
         }
         else {
